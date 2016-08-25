@@ -1,0 +1,37 @@
+{
+    "name": "http-interop/http-factory-slim",
+    "description": "An HTTP Factory using Slim HTTP",
+    "keywords": [
+        "psr-7",
+        "psr-17",
+        "http",
+        "factory"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PHP-FIG",
+            "homepage": "http://www.php-fig.org/"
+        }
+    ],
+    "require": {
+        "http-interop/http-factory": "dev-master",
+        "slim/http": "^0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Http\\Factory\\Slim\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Http\\Factory\\Slim\\": "tests/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/http-interop/http-factory.git"
+        }
+    ]
+}
