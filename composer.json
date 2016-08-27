@@ -18,20 +18,22 @@
         "http-interop/http-factory": "dev-master",
         "slim/http": "^0.1"
     },
+    "require-dev": {
+        "http-interop/http-factory-tests": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "Http\\Factory\\Slim\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Http\\Factory\\Slim\\": "tests/"
         }
     },
     "repositories": [
         {
             "type": "git",
             "url": "https://github.com/http-interop/http-factory.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/http-interop/http-factory-tests.git"
         }
     ]
 }
