@@ -25,7 +25,7 @@ class UploadedFileFactory implements UploadedFileFactoryInterface
 
         if (is_resource($file)) {
             $meta = stream_get_meta_data($file);
-            $file = $meta["uri"];
+            $file = $meta['uri'];
         }
 
         return new UploadedFile($file, $clientFilename, $clientMediaType, $size, $error);
