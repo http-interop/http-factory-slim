@@ -5,6 +5,8 @@ namespace Http\Factory\Slim;
 use Interop\Http\Factory\ServerRequestFactoryInterface;
 use Psr\Http\Message\UriInterface;
 use Slim\Http\FactoryDefault;
+use Slim\Http\Headers;
+use Slim\Http\Request as ServerRequest;
 
 class ServerRequestFactory implements ServerRequestFactoryInterface
 {
@@ -18,12 +20,22 @@ class ServerRequestFactory implements ServerRequestFactoryInterface
         $this->factoryDefault = new FactoryDefault();
     }
 
-    public function createServerRequest(array $server, $method = null, $uri = null)
+    public function createServerRequest($method, $uri)
     {
-        if (null !== $method) {
-            $server['REQUEST_METHOD'] = $method;
+        if (!$uri instanceof UriInterface) {
+            $uri = (new UriFactory())->createUri($uri);
         }
 
+        $headers = new Headers([]);
+        $cookies = [];
+        $serverParams = [];
+        $body = (new StreamFactory())->createStream();
+
+        return new ServerRequest($method, $uri, $headers, $cookies, $serverParams, $body);
+    }
+
+    public function createServerRequestFromArray(array $server)
+    {
         if (!isset($server['REQUEST_METHOD'])) {
             throw new \InvalidArgumentException('Cannot determine HTTP method');
         }
@@ -37,17 +49,6 @@ class ServerRequestFactory implements ServerRequestFactoryInterface
         // Restore POST
         $_POST = $post;
         unset($post);
-
-        if (null !== $uri) {
-            if (is_string($uri)) {
-                $uri = (new UriFactory)->createUri($uri);
-
-            } elseif (!$uri instanceof UriInterface) {
-                throw new \InvalidArgumentException('URI must be a valid URI string or an instanceof '.UriInterface::class);
-            }
-
-            $request = $request->withUri($uri);
-        }
 
         return $request;
     }
