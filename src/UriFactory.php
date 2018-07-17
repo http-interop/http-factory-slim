@@ -3,11 +3,12 @@
 namespace Http\Factory\Slim;
 
 use Interop\Http\Factory\UriFactoryInterface;
+use Psr\Http\Message\UriInterface;
 use Slim\Http\Uri;
 
 class UriFactory implements UriFactoryInterface
 {
-    public function createUri($uri = '')
+    public function createUri(string $uri = ''): UriInterface
     {
         if (!is_string($uri)) {
             throw new \InvalidArgumentException(sprintf(

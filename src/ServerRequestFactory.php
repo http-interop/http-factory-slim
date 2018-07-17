@@ -3,6 +3,7 @@
 namespace Http\Factory\Slim;
 
 use Interop\Http\Factory\ServerRequestFactoryInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
 use Slim\Http\FactoryDefault;
 use Slim\Http\Headers;
@@ -20,7 +21,7 @@ class ServerRequestFactory implements ServerRequestFactoryInterface
         $this->factoryDefault = new FactoryDefault();
     }
 
-    public function createServerRequest($method, $uri)
+    public function createServerRequest(string $method, $uri, array $serverParams = []): ServerRequestInterface
     {
         if (!$uri instanceof UriInterface) {
             $uri = (new UriFactory())->createUri($uri);
@@ -28,28 +29,8 @@ class ServerRequestFactory implements ServerRequestFactoryInterface
 
         $headers = new Headers([]);
         $cookies = [];
-        $serverParams = [];
         $body = (new StreamFactory())->createStream();
 
         return new ServerRequest($method, $uri, $headers, $cookies, $serverParams, $body);
-    }
-
-    public function createServerRequestFromArray(array $server)
-    {
-        if (!isset($server['REQUEST_METHOD'])) {
-            throw new \InvalidArgumentException('Cannot determine HTTP method');
-        }
-
-        // Prevent the factory from reading the global POST
-        $post = $_POST;
-        $_POST = [];
-
-        $request = $this->factoryDefault->makeRequest($server);
-
-        // Restore POST
-        $_POST = $post;
-        unset($post);
-
-        return $request;
     }
 }
