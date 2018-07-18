@@ -20,6 +20,15 @@ class UploadedFileFactory implements UploadedFileFactoryInterface
             $size = $stream->getSize();
         }
 
-        return new UploadedFile($stream, $clientFilename, $clientMediaType, $size, $error);
+        $meta = $stream->getMetadata();
+        $file = $meta['uri'];
+
+        if ($file === 'php://temp') {
+            // Slim needs an actual path to the file
+            $file = tempnam(sys_get_temp_dir(), 'factory-test');
+            file_put_contents($file, $stream->getContents());
+        }
+
+        return new UploadedFile($file, $clientFilename, $clientMediaType, $size, $error);
     }
 }
