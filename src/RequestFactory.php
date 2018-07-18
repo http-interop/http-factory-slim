@@ -3,13 +3,14 @@
 namespace Http\Factory\Slim;
 
 use Interop\Http\Factory\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 use Slim\Http\Headers;
 use Slim\Http\Request;
 
 class RequestFactory implements RequestFactoryInterface
 {
-    public function createRequest($method, $uri)
+    public function createRequest(string $method, $uri): RequestInterface
     {
         if (is_string($uri)) {
             $uri = (new UriFactory)->createUri($uri);
