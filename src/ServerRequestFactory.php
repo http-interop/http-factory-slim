@@ -2,7 +2,7 @@
 
 namespace Http\Factory\Slim;
 
-use Interop\Http\Factory\ServerRequestFactoryInterface;
+use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
 use Slim\Http\FactoryDefault;
