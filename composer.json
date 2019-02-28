@@ -19,10 +19,7 @@
     },
     "require": {
         "psr/http-factory": "^1.0",
-        "slim/http": "^0.1.1"
-    },
-    "conflict": {
-        "slim/slim": "<4.0"
+        "slim/slim": "^3.0"
     },
     "require-dev": {
         "http-interop/http-factory-tests": "^0.5",
