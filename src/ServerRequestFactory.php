@@ -5,8 +5,8 @@ namespace Http\Factory\Slim;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
-use Slim\Http\Headers;
-use Slim\Http\Request as ServerRequest;
+use Slim\Psr7\Headers;
+use Slim\Psr7\Request;
 
 class ServerRequestFactory implements ServerRequestFactoryInterface
 {
@@ -20,6 +20,6 @@ class ServerRequestFactory implements ServerRequestFactoryInterface
         $cookies = [];
         $body = (new StreamFactory())->createStream();
 
-        return new ServerRequest($method, $uri, $headers, $cookies, $serverParams, $body);
+        return new Request($method, $uri, $headers, $cookies, $serverParams, $body);
     }
 }

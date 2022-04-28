@@ -5,7 +5,7 @@ namespace Http\Factory\Slim;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileInterface;
-use Slim\Http\UploadedFile;
+use Slim\Psr7\UploadedFile;
 
 class UploadedFileFactory implements UploadedFileFactoryInterface
 {

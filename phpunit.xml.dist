@@ -14,15 +14,4 @@
         <const name="UPLOADED_FILE_FACTORY" value="Http\Factory\Slim\UploadedFileFactory"/>
         <const name="URI_FACTORY" value="Http\Factory\Slim\UriFactory"/>
     </php>
-
-    <filter>
-        <whitelist>
-            <directory>./src/</directory>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-text" target="php://stdout"/>
-        <log type="coverage-html" target="build/coverage" charset="UTF-8" yui="true" highlight="true"/>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-    </logging>
 </phpunit>

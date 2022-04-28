@@ -2,9 +2,12 @@
 
 namespace Http\Factory\Slim;
 
+use PHPUnit\Framework\Error\Warning;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
-use Slim\Http\Stream;
+use RuntimeException;
+use Slim\Psr7\Stream;
+use ValueError;
 
 class StreamFactory implements StreamFactoryInterface
 {
@@ -19,9 +22,14 @@ class StreamFactory implements StreamFactoryInterface
 
     public function createStreamFromFile(string $file, string $mode = 'r'): StreamInterface
     {
-        $resource = fopen($file, $mode);
+        try {
+            $resource = fopen($file, $mode);
 
-        return $this->createStreamFromResource($resource);
+            return $this->createStreamFromResource($resource);
+        } catch (ValueError|Warning $error) {
+            throw new RuntimeException(previous: $error);
+        }
+
     }
 
     public function createStreamFromResource($resource): StreamInterface

@@ -4,7 +4,7 @@ namespace Http\Factory\Slim;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Http\Response;
+use Slim\Psr7\Response;
 
 class ResponseFactory implements ResponseFactoryInterface
 {

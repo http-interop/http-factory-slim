@@ -4,7 +4,7 @@ namespace Http\Factory\Slim;
 
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
-use Slim\Http\Uri;
+use Slim\Psr7\Uri;
 
 class UriFactory implements UriFactoryInterface
 {

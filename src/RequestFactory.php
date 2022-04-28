@@ -5,8 +5,8 @@ namespace Http\Factory\Slim;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
-use Slim\Http\Headers;
-use Slim\Http\Request;
+use Slim\Psr7\Headers;
+use Slim\Psr7\Request;
 
 class RequestFactory implements RequestFactoryInterface
 {
