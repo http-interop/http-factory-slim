@@ -19,7 +19,20 @@ class StreamFactory implements StreamFactoryInterface
 
     public function createStreamFromFile(string $file, string $mode = 'r'): StreamInterface
     {
-        $resource = fopen($file, $mode);
+        try {
+            $resource = fopen($file, $mode);
+        } catch (\Throwable $e) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Unable to open "%s" using mode "%s": "%s',
+                    $file,
+                    $mode,
+                    $e->getMessage(),
+                ),
+                0,
+                $e,
+            );
+        }
 
         return $this->createStreamFromResource($resource);
     }
